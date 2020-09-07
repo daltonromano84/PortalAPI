@@ -9,9 +9,17 @@ namespace PortalAPI.Data
 
     public class MockColaboradorRepository : IColaboradorRepository
     {
+        public void CreateColaborador(Colaborador colaborador)
+        {
+            throw new NotImplementedException();
+        }
 
-        
-        public IEnumerable<Colaborador> GetColaboradores()
+        public void DeleteCommand(Colaborador colaborador)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Colaborador> GetAllColaboradores()
         {
             var colaboradores = new List<Colaborador>
             {
@@ -62,6 +70,15 @@ namespace PortalAPI.Data
             };
         }
 
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateColaborador(Colaborador colaborador)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

@@ -6,8 +6,15 @@ namespace PortalAPI.Data
 
  public interface IColaboradorRepository
  {
-     IEnumerable<Colaborador> GetColaboradores();
+
+     bool SaveChanges();
+     IEnumerable<Colaborador> GetAllColaboradores();
      Colaborador GetColaboradorById(int id);
+
+     void CreateColaborador(Colaborador colaborador);
+     void UpdateColaborador(Colaborador colaborador);
+
+     void DeleteCommand(Colaborador colaborador);
  }
 
 }

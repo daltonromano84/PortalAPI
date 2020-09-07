@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PortalAPI.Models
 {
@@ -11,6 +12,7 @@ public class Colaborador
     public int Id { get; set; }
 
     [Required]
+    [ForeignKey("Empresa")]
     public int IdEmpresa { get; set; }
     [Required]
     public int Matricula { get; set; }
@@ -22,6 +24,8 @@ public class Colaborador
     [Required]
     public DateTime   DataAdmissao { get; set; }   
     public DateTime?   DataDemissao { get; set; }   
+
+    public Empresa Empresa { get; set; }
  
 
 }

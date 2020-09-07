@@ -10,8 +10,8 @@ using PortalAPI.Data;
 namespace PortalAPI.Migrations
 {
     [DbContext(typeof(PortalApiContext))]
-    [Migration("20200828020822_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20200901212954_atualizaField")]
+    partial class atualizaField
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,7 +50,40 @@ namespace PortalAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdEmpresa");
+
                     b.ToTable("Colaboradores");
+                });
+
+            modelBuilder.Entity("PortalAPI.Models.Empresa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CNPJ")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Empresas");
+                });
+
+            modelBuilder.Entity("PortalAPI.Models.Colaborador", b =>
+                {
+                    b.HasOne("PortalAPI.Models.Empresa", "Empresa")
+                        .WithMany("Colaboradores")
+                        .HasForeignKey("IdEmpresa")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
