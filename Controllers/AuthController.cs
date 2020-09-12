@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -19,11 +20,16 @@ namespace PortalAPI.Controllers
     {
 
         private IUserRepository _userRepository;
+        private IColaboradorRepository _colaboradorRepository;
+         private IMapper _mapper;
 
-        public AuthController(IUserRepository userRepository)
+        public AuthController(IUserRepository userRepository,IColaboradorRepository colaboradorRepository,IMapper mapper) 
         {
 
             _userRepository = userRepository;
+            _colaboradorRepository = colaboradorRepository;
+            _mapper = mapper;
+            
             
         }
         [HttpPost("Register")]
@@ -35,8 +41,33 @@ namespace PortalAPI.Controllers
 
                   var result = await _userRepository.RegisterUserAsync(model);
 
-                  if(result.IsSuccess)
+                  if(result.IsSuccess){
+
+           
+
+               //  var colaboradorModel = _mapper.Map<Colaborador>(model);
+
+               Colaborador colaborador = new Colaborador{
+
+                   IdEmpresa = model.IdEmpresa,
+                   IdCargo = model.IdCargo,
+                   DataAdmissao =  DateTime.Now,
+                   Matricula = model.Matricula,
+                   Nome = model.Nome
+                  
+                   
+               };
+
+
+                _colaboradorRepository.CreateColaborador(colaborador);
+                _colaboradorRepository.SaveChanges();
+
+              //  var colaboradorReadDto = _mapper.Map<ColaboradorReadDto>(colaboradorModel);
+
                   return Ok(result);
+
+                  }
+                
 
 
                   return BadRequest(result);

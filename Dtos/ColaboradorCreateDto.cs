@@ -8,7 +8,6 @@ public class ColaboradorCreateDto
 {
   
     [Required]
-
     public int IdEmpresa { get; set; }
     [Required]
 

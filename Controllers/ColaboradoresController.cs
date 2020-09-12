@@ -12,7 +12,7 @@ namespace PortalAPI.Controllers
 {
     
     //api/colaboradores
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ColaboradoresController : ControllerBase
